@@ -1,0 +1,20 @@
+module memory(input clk,we,rst,[7:0]data_in,input [3:0]w_add,input re,input [3:0]r_add, output reg [7:0] data_out);
+reg [15:0]mem[3:0];//depth and width of the memory declared 16 bit width 8 bit width
+//to strore 16 we need 4 bits to represent 
+//to store 8 we need 3 bits 
+//functionality of memory
+integer m;
+always@(posedge clk)
+begin
+if(rst)
+begin
+for(m=0;m<16;m=m+1)
+mem[m]<=0;
+end
+if(we)
+mem[w_add] <= data_in;
+if(re)
+data_out <= mem[r_add];
+end
+endmodule
+
